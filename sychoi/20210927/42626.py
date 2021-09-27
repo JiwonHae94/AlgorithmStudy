@@ -30,14 +30,14 @@ def make_heap(scoville):
 
 def solution(scoville, K):
     answer = 0
-    heap = make_heap(scoville)
-
+    # heap = make_heap(scoville)
+    heapq.heapify(scoville)
     cnt = 0
-    while heap[0] < K:
-        mix_val = heapq.heappop(heap) + heapq.heappop(heap) * 2
-        heapq.heappush(heap, mix_val)
+    while scoville[0] < K:
+        mix_val = heapq.heappop(scoville) + heapq.heappop(scoville) * 2
+        heapq.heappush(scoville, mix_val)
 
-        if len(heap) == 1 and heap[0] < K:
+        if len(scoville) == 1 and scoville[0] < K:
             return -1
 
         answer += 1
