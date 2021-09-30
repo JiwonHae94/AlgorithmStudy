@@ -10,9 +10,21 @@ def grid(m, n, puddles):
     return grid(m-1,n,puddles) + grid(m,n-1,puddles)
 
 
-def solution(m, n, puddles):0
+def solution(m, n, puddles):
+    
+    answer = [[0]*m for i in range(n)]
+    
+    for i in range(n):
+        for j in range(m):
+            if i == 0 and j == 0:
+                answer[i][j] = 1
+                continue
+            tmp = [j+1, i+1]
+            if tmp in puddles:
+                answer[i][j] = 0
+            else:
+                answer[i][j] = (answer[i-1][j] + answer[i][j-1]) % 1000000007
+                
+    return answer[n-1][m-1]
 
-    answer = grid(m,n,puddles)
-    return answer
-
-
+print(solution(4, 3, [[2, 2]]))
